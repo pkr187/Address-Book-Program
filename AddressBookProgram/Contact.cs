@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBookProgram
+namespace AddressBook
 {
-    internal class Contacts
+    internal class Contact
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,5 +18,3 @@ namespace AddressBookProgram
         public string Email { get; set; }
     }
 }
-    
-

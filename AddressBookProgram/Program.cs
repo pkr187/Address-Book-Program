@@ -1,17 +1,38 @@
-﻿using AddressBookProgram;
-using System.Net.NetworkInformation;
-
-using AddressBookProgram;
+﻿using AddressBook;
 Console.WriteLine("Welcome to Address Book Program");
-Contacts contact = new Contacts()
+AddressBookprogram addressbook = new AddressBookprogram();
+while (true)
 {
-    FirstName = "Pankaj",
-    LastName = "kumar",
-    Address = "Banglore",
-    City = "Whitefield",
-    State = "Karnatika",
-    Zip = 560048,
-    PhoneNumber = "8825178849",
-    Email = "pankajroman187@gmail.com"
-};
-Console.WriteLine("FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "Zip: " + contact.Zip + "\n" + "PhoneNumber: " + contact.PhoneNumber + "\n" + "Email: " + contact.Email);
+    Console.WriteLine("\nSelect Option\n 1.Add\n");
+    int option = Convert.ToInt32(Console.ReadLine());
+    switch (option)
+    {
+        case 1:
+            Contact contact = new Contact();
+            {
+                Console.WriteLine("Enter FirstName: ");
+                contact.FirstName = Console.ReadLine();
+                Console.WriteLine("Enter LastName: ");
+                contact.LastName = Console.ReadLine();
+                Console.WriteLine("Enter Address: ");
+                contact.Address = Console.ReadLine();
+                Console.WriteLine("Enter City: ");
+                contact.City = Console.ReadLine();
+                Console.WriteLine("Enter State: ");
+                contact.State = Console.ReadLine();
+                Console.WriteLine("Enter Zip: ");
+                contact.Zip = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter PhoneNumber: ");
+                contact.PhoneNumber = Console.ReadLine();
+                Console.WriteLine("Enter Email: ");
+                contact.Email = Console.ReadLine();
+            }
+            Console.WriteLine("\nDisplay Added Contact:-");
+            addressbook.AddContact(contact);
+            break;
+
+        default:
+            Console.WriteLine("Invalid Choice");
+            break;
+    }
+}
