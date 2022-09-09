@@ -1,9 +1,11 @@
-﻿using AddressBook;
+﻿using AddressBookProgram;
+
+using AddressBookProgram;
 Console.WriteLine("Welcome to Address Book Program");
-AddressBookprogram addressbook = new AddressBookprogram();
+AddressBook addressbook = new AddressBook();
 while (true)
 {
-    Console.WriteLine("\nSelect Option\n 1.Add\n");
+    Console.WriteLine("\nSelect Option\n 1.Add\n 2.Edit\n");
     int option = Convert.ToInt32(Console.ReadLine());
     switch (option)
     {
@@ -29,6 +31,12 @@ while (true)
             }
             Console.WriteLine("\nDisplay Added Contact:-");
             addressbook.AddContact(contact);
+            break;
+
+        case 2:
+            Console.WriteLine("Enter Phone Number to Edit Contact Details");
+            string PhoneNumber = Console.ReadLine();
+            addressbook.EditContact(PhoneNumber);
             break;
 
         default:
