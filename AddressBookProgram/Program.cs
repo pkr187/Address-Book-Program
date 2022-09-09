@@ -5,7 +5,7 @@ Console.WriteLine("Welcome to Address Book Program");
 AddressBook addressbook = new AddressBook();
 while (true)
 {
-    Console.WriteLine("\nSelect Option\n 1.Add\n 2.Edit\n");
+    Console.WriteLine("\nSelect Option\n 1.Add\n 2.Edit\n 3.Delete\n");
     int option = Convert.ToInt32(Console.ReadLine());
     switch (option)
     {
@@ -37,6 +37,12 @@ while (true)
             Console.WriteLine("Enter Phone Number to Edit Contact Details");
             string PhoneNumber = Console.ReadLine();
             addressbook.EditContact(PhoneNumber);
+            break;
+
+        case 3:
+            Console.WriteLine("Enter Phone Number to Delete Contact Details");
+            string Phonenumber = Console.ReadLine();
+            addressbook.DeleteContact(Phonenumber);
             break;
 
         default:
