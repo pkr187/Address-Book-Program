@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Addressbook\\AddressBook\\AddressBook.csproj",
+      "projectUniqueName": "C:\\AddressBookProgram\\AddressBook\\AddressBook.csproj",
       "projectName": "AddressBook",
-      "projectPath": "C:\\Addressbook\\AddressBook\\AddressBook.csproj",
+      "projectPath": "C:\\AddressBookProgram\\AddressBook\\AddressBook.csproj",
       "packagesPath": "C:\\Users\\PCS\\.nuget\\packages\\",
-      "outputPath": "C:\\Addressbook\\AddressBook\\obj\\",
+      "outputPath": "C:\\AddressBookProgram\\AddressBook\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PCS\\AppData\\Roaming\\NuGet\\NuGet.Config",
