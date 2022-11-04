@@ -2,6 +2,19 @@
 {
     internal class Program
     {
+        public static void WriteToFile()
+        {
+            string path = @"C:\AddressBookProgram\Addressbook\Contact.txt";
+
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                foreach (var kv in addressBookSystem)
+                {
+                    foreach (var contact in kv.Value)
+                        sw.WriteLine(contact.ToString());
+                }
+            }
+        }
         public static void SortByCityAndStateOrZip()
         {
             Console.WriteLine("Do you want to sort contact then press 1 for yes and 2 for no ");
@@ -357,16 +370,21 @@
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Sytem.");
-
-            CreateAddresBook();
-            DisplayDictionary(addressBookSystem);
-            // SearchByCityOrState();
-            //FilterByCityAndState();
-            // ShowCountofContactsbyCityandState();
-            SortByName();
-            //DisplayContacts();
-            //EditContacts();
-            //DeleteContacts();            
+            try
+            {
+                CreateAddresBook();
+                DisplayDictionary(addressBookSystem);
+                //DisplayContacts();
+                //SearchByCityOrState();
+                //FilterByCityAndState();
+                //ShowCountofContactsbyCityandState();
+                //SortByName();
+                WriteToFile();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
