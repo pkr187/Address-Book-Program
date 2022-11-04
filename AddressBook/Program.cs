@@ -1,7 +1,36 @@
 ﻿namespace Addressbook
 {
-    public class Program
+    internal class Program
     {
+        public static void SortByName()
+        {
+            Console.WriteLine("Do you want to sort contact using firstname then press 1 or press 2 for exit ");
+            int num = Convert.ToInt32(Console.ReadLine());
+
+            List<Contact> sort = new List<Contact>();
+            foreach (var kv in addressBookSystem)
+            {
+                var list = kv.Value.OrderBy(x => x.firstName).ToList();
+                sort.AddRange(list);
+            }
+            DisplayContactsByName(sort);
+
+            Console.WriteLine("===============================");
+        }
+        public static void DisplayContactsByName(List<Contact> sort)
+        {
+            //print contacts
+
+
+            Console.WriteLine("Current contacts in adress book:");
+
+            foreach (Contact contact in sort)
+            {
+                Console.WriteLine(contact.firstName);
+            }
+            Console.WriteLine("=============================================================");
+
+        }
         public static void ShowCountofContactsbyCityandState()
         {
             Console.WriteLine("Enter city name to show counts in that city");
@@ -20,7 +49,6 @@
                 Console.WriteLine("number of contacts in state {0} are {1}", icity, stateDict[icity].Count);
             else
                 Console.WriteLine("number of contacts in state {0} are zero", icity);
-
         }
         public static void FilterByCityAndState()
         {
@@ -29,13 +57,11 @@
                 foreach (Contact contact in kv.Value)
                 {
                     // City filtering
-
                     //check city is added into city dictionary?
                     if (cityDict.ContainsKey(contact.city))
                     {
                         //add contact entry into exiting key- value (city-contacts) list
                         cityDict[contact.city].Add(contact);
-
                     }
                     else
                     {
@@ -44,9 +70,7 @@
                         //adding contact entry into created key city
                         cityDict[contact.city].Add(contact);
                     }
-
                     //state filtering
-
                     //check state is added into state dictionary?
                     if (stateDict.ContainsKey(contact.state))
                     {
@@ -65,11 +89,9 @@
 
             DisplayDictionary(cityDict);
             DisplayDictionary(stateDict);
-
         }
         public static void SearchByCityOrState()
         {
-
             Console.WriteLine("Do you want to search city or state for contact then press 1 or press 2 for exit ");
             int num = Convert.ToInt32(Console.ReadLine());
             while (num == 1)
@@ -131,7 +153,6 @@
             Console.WriteLine("Do you want to add new contact press 1 or press 2 to cancle.");
             int num = Convert.ToInt32(Console.ReadLine());
 
-
             while (num == 1)
             {
                 Contact contact = new Contact();
@@ -147,7 +168,6 @@
         }
         public static bool CheckDuplicate(List<Contact> contacts, string firstName)
         {
-
             //Any will check for duplicate same firstnamename in database
             if (contacts.Count > 0)
             {
@@ -157,16 +177,12 @@
                     Console.WriteLine("Already exist in database");
                     return true;
                 }
-
-
             }
             return false;
         }
         public static void DisplayContacts(List<Contact> contacts)
         {
             //print contacts
-
-            Console.WriteLine("=============================================================");
             Console.WriteLine("Current contacts in adress book:");
 
             foreach (Contact contact in contacts)
@@ -174,7 +190,6 @@
                 Console.WriteLine(contact.firstName);
             }
             Console.WriteLine("=============================================================");
-
         }
         public static void EditContacts(List<Contact> contacts)
         {
@@ -187,6 +202,7 @@
                 bool found = false;
                 for (int i = 0; i < contacts.Count; i++)
                 {
+
                     if (contacts[i].firstName == firstName)
                     {
                         found = true;  //found the contact
@@ -195,7 +211,6 @@
                         if (!FillingDetails(contacts[i], contacts)) ;
                         Console.WriteLine("Name is available in database");
                         break;
-
                     }
                 } //end of for loop
                 if (!found)
@@ -205,7 +220,6 @@
                 Console.WriteLine("Do you want to edit contact press 1 to edit or press 2 to cancle.");
                 num = Convert.ToInt32(Console.ReadLine());
             }//while loop end
-
         }
         public static void DeleteContacts(List<Contact> contacts)
         {
@@ -228,7 +242,6 @@
 
                         contacts.RemoveAt(i);
                         break;
-
                     }
                 }
 
@@ -270,15 +283,14 @@
                 addressBookSystem.Add(name, addressBook);
 
                 CreatingContacts(addressBook);
-                /*
                 if (addressBook.Count > 0)
                 {
                     EditContacts(addressBook);
                     DeleteContacts(addressBook);
                 }
-                
+
                 DisplayDictionary(addressBookSystem);
-                */
+
                 Console.WriteLine("Do you want to create another addressbook press 1 or press 2 for exit:");
                 num = Convert.ToInt32(Console.ReadLine());
             }
@@ -293,9 +305,10 @@
 
             CreateAddresBook();
             DisplayDictionary(addressBookSystem);
-            //SearchByCityOrState();
-            FilterByCityAndState();
-            ShowCountofContactsbyCityandState();
+            // SearchByCityOrState();
+            //FilterByCityAndState();
+            // ShowCountofContactsbyCityandState();
+            SortByName();
             //DisplayContacts();
             //EditContacts();
             //DeleteContacts();            
