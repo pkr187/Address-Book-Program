@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System.Formats.Asn1;
 using System.Globalization;
 
@@ -6,6 +7,33 @@ namespace Addressbook
 {
     internal class Program
     {
+        public static void WriteToJsonFile()
+        {
+            string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contact.json";
+
+            foreach (var book in addressBookSystem.Values)
+            {
+                string jsonData = JsonConvert.SerializeObject(book);
+
+                File.WriteAllText(path, jsonData);
+            }
+
+            Console.WriteLine("wrote contact jason file");
+        }
+        public static void ReadJsonFile()
+        {
+            string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contact.json";
+            string jsonData = File.ReadAllText(path);
+            if (jsonData != null || jsonData.Equals(String.Empty))
+            {
+                var jsonResult = JsonConvert.DeserializeObject<List<Contact>>(jsonData).ToList();
+                Console.WriteLine("Reading from Json file");
+                foreach (var item in jsonResult)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+        }
         public static void WriteToCsvFile()
         {
             string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contacts.csv";
@@ -413,8 +441,10 @@ namespace Addressbook
                 //ShowCountofContactsbyCityandState();
                 //SortByName();
                 // WriteToFile();
-                WriteToCsvFile();
-                ReadCsvFile();
+                //WriteToCsvFile();
+                //ReadCsvFile();
+                WriteToJsonFile();
+                ReadJsonFile();
             }
             catch (Exception ex)
             {

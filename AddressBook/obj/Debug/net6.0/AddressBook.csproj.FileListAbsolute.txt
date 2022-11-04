@@ -4,6 +4,7 @@ C:\AddressBookProgram\Addressbook\bin\Debug\net6.0\Addressbook.runtimeconfig.jso
 C:\AddressBookProgram\Addressbook\bin\Debug\net6.0\Addressbook.dll
 C:\AddressBookProgram\Addressbook\bin\Debug\net6.0\Addressbook.pdb
 C:\AddressBookProgram\Addressbook\bin\Debug\net6.0\CsvHelper.dll
+C:\AddressBookProgram\Addressbook\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\AddressBookProgram\Addressbook\obj\Debug\net6.0\Addressbook.csproj.AssemblyReference.cache
 C:\AddressBookProgram\Addressbook\obj\Debug\net6.0\Addressbook.GeneratedMSBuildEditorConfig.editorconfig
 C:\AddressBookProgram\Addressbook\obj\Debug\net6.0\Addressbook.AssemblyInfoInputs.cache
