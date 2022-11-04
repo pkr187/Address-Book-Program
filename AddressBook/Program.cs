@@ -1,7 +1,27 @@
 ﻿namespace Addressbook
 {
-    internal class Program
+    public class Program
     {
+        public static void ShowCountofContactsbyCityandState()
+        {
+            Console.WriteLine("Enter city name to show counts in that city");
+            string icity = Console.ReadLine();
+
+            if (cityDict.ContainsKey(icity))
+                Console.WriteLine("number of contacts in city {0} are {1}", icity, cityDict[icity].Count);
+            else
+                Console.WriteLine("number of contacts in city {0} are zero", icity);
+
+
+            Console.WriteLine("Enter state name to show counts in that state");
+            icity = Console.ReadLine();
+
+            if (stateDict.ContainsKey(icity))
+                Console.WriteLine("number of contacts in state {0} are {1}", icity, stateDict[icity].Count);
+            else
+                Console.WriteLine("number of contacts in state {0} are zero", icity);
+
+        }
         public static void FilterByCityAndState()
         {
             foreach (var kv in addressBookSystem)
@@ -24,7 +44,9 @@
                         //adding contact entry into created key city
                         cityDict[contact.city].Add(contact);
                     }
+
                     //state filtering
+
                     //check state is added into state dictionary?
                     if (stateDict.ContainsKey(contact.state))
                     {
@@ -40,11 +62,14 @@
                     }
                 }
             }
+
             DisplayDictionary(cityDict);
             DisplayDictionary(stateDict);
+
         }
         public static void SearchByCityOrState()
         {
+
             Console.WriteLine("Do you want to search city or state for contact then press 1 or press 2 for exit ");
             int num = Convert.ToInt32(Console.ReadLine());
             while (num == 1)
@@ -106,6 +131,7 @@
             Console.WriteLine("Do you want to add new contact press 1 or press 2 to cancle.");
             int num = Convert.ToInt32(Console.ReadLine());
 
+
             while (num == 1)
             {
                 Contact contact = new Contact();
@@ -119,7 +145,6 @@
             Console.WriteLine("=============================================================");
             Console.WriteLine("Total number of contact in address book:" + contacts.Count);
         }
-
         public static bool CheckDuplicate(List<Contact> contacts, string firstName)
         {
 
@@ -132,6 +157,8 @@
                     Console.WriteLine("Already exist in database");
                     return true;
                 }
+
+
             }
             return false;
         }
@@ -160,7 +187,6 @@
                 bool found = false;
                 for (int i = 0; i < contacts.Count; i++)
                 {
-
                     if (contacts[i].firstName == firstName)
                     {
                         found = true;  //found the contact
@@ -179,6 +205,7 @@
                 Console.WriteLine("Do you want to edit contact press 1 to edit or press 2 to cancle.");
                 num = Convert.ToInt32(Console.ReadLine());
             }//while loop end
+
         }
         public static void DeleteContacts(List<Contact> contacts)
         {
@@ -204,6 +231,7 @@
 
                     }
                 }
+
                 if (found)
                 {
                     if (contacts.Count == 0) //if size 0 nothing to delete further
@@ -267,6 +295,7 @@
             DisplayDictionary(addressBookSystem);
             //SearchByCityOrState();
             FilterByCityAndState();
+            ShowCountofContactsbyCityandState();
             //DisplayContacts();
             //EditContacts();
             //DeleteContacts();            
