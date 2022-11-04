@@ -1,11 +1,18 @@
-﻿namespace AddressBook
+﻿namespace Addressbook
 {
     public class Program
     {
-        public static void FillingDetails(Contact contact)
+        public static bool FillingDetails(Contact contact, List<Contact> contacts)
         {
             Console.WriteLine("Enter first name: ");
-            contact.firstName = Console.ReadLine();
+            string tempFirstname = Console.ReadLine();
+
+
+            if (CheckDuplicate(contacts, tempFirstname))
+            {
+                return false;
+            }
+            contact.firstName = tempFirstname;
 
             Console.WriteLine("Enter last name: ");
             contact.lastName = Console.ReadLine();
@@ -27,6 +34,7 @@
 
             Console.WriteLine("Enter zipcode: ");
             contact.zipcode = Convert.ToInt32(Console.ReadLine());
+            return true;
         }
 
         public static void CreatingContacts(List<Contact> contacts)
@@ -38,8 +46,9 @@
             while (num == 1)
             {
                 Contact contact = new Contact();
-                FillingDetails(contact);
-                contacts.Add(contact);
+
+                if (FillingDetails(contact, contacts))
+                    contacts.Add(contact);
 
                 Console.WriteLine("Do you want to add anoter contact then press 1 or press 2 for exit ");
                 num = Convert.ToInt32(Console.ReadLine());
@@ -48,6 +57,23 @@
             Console.WriteLine("Total number of contact in address book:" + contacts.Count);
         }
 
+        public static bool CheckDuplicate(List<Contact> contacts, string firstName)
+        {
+
+            //Any will check for duplicate same firstnamename in database
+            if (contacts.Count > 0)
+            {
+
+                if (contacts.Any(x => x.firstName.Equals(firstName)))
+                {
+                    Console.WriteLine("Already exist in database");
+                    return true;
+                }
+
+
+            }
+            return false;
+        }
         public static void DisplayContacts(List<Contact> contacts)
         {
             //print contacts
@@ -80,7 +106,8 @@
                         found = true;  //found the contact
 
                         //now editing...
-                        FillingDetails(contacts[i]);
+                        if (!FillingDetails(contacts[i], contacts)) ;
+                        Console.WriteLine("Name is available in database");
                         break;
 
                     }
@@ -172,6 +199,7 @@
                 num = Convert.ToInt32(Console.ReadLine());
             }
         }
+
 
 
         public static Dictionary<string, List<Contact>> addressBookSystem = new Dictionary<string, List<Contact>>();

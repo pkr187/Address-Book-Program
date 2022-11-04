@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w/yUWS1Z5JGVTuFOotULUud6u08jYakIKhrnPfZ3cYFLPsin1OAsyUkXv+OVC30EIKszsIBAqg+uY/oc6oKl+A==",
+  "dgSpecHash": "pmJsL6F8dm4/8mkCq6IE/hx2Xbm/VA1gU4fypW+my6FIJaNo9/zaaPsob9QB71KSPUUs9KKlmt6EYR79woo+0A==",
   "success": true,
-  "projectFilePath": "C:\\AddressBookProgram\\AddressBook\\AddressBook.csproj",
+  "projectFilePath": "C:\\AddressBookProgram\\Addressbook\\Addressbook.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
