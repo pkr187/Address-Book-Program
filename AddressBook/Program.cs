@@ -2,6 +2,55 @@
 {
     internal class Program
     {
+        public static void SortByCityAndStateOrZip()
+        {
+            Console.WriteLine("Do you want to sort contact then press 1 for yes and 2 for no ");
+            int num1 = Convert.ToInt32(Console.ReadLine());
+            while (num1 == 1)
+            {
+                Console.WriteLine("Press following keys for sort : ");
+                Console.WriteLine("press 1 for City: ");
+                Console.WriteLine("press 2 for State");
+                Console.WriteLine("press 3 for Zipcode: ");
+                Console.WriteLine("press any key for Exit");
+
+                int num = Convert.ToInt32(Console.ReadLine());
+                List<Contact> sort = new List<Contact>();
+                switch (num)
+                {
+                    case 1:
+                        foreach (var kv in addressBookSystem)
+                        {
+                            var list = kv.Value.OrderBy(x => x.city).ToList();
+                            sort.AddRange(list);
+                        }
+                        DisplayContactsByName(sort);
+
+                        Console.WriteLine("===============================");
+                        break;
+                    case 2:
+                        foreach (var kv in addressBookSystem)
+                        {
+                            var list = kv.Value.OrderBy(x => x.state).ToList();
+                            sort.AddRange(list);
+                        }
+                        DisplayContactsByName(sort);
+
+                        Console.WriteLine("===============================");
+                        break;
+                    case 3:
+                        foreach (var kv in addressBookSystem)
+                        {
+                            var list = kv.Value.OrderBy(x => x.zipcode).ToList();
+                            sort.AddRange(list);
+                        }
+                        DisplayContactsByName(sort);
+
+                        Console.WriteLine("===============================");
+                        break;
+                }
+            }
+        }
         public static void SortByName()
         {
             Console.WriteLine("Do you want to sort contact using firstname then press 1 or press 2 for exit ");
@@ -20,8 +69,6 @@
         public static void DisplayContactsByName(List<Contact> sort)
         {
             //print contacts
-
-
             Console.WriteLine("Current contacts in adress book:");
 
             foreach (Contact contact in sort)
@@ -49,6 +96,7 @@
                 Console.WriteLine("number of contacts in state {0} are {1}", icity, stateDict[icity].Count);
             else
                 Console.WriteLine("number of contacts in state {0} are zero", icity);
+
         }
         public static void FilterByCityAndState()
         {
@@ -57,11 +105,13 @@
                 foreach (Contact contact in kv.Value)
                 {
                     // City filtering
+
                     //check city is added into city dictionary?
                     if (cityDict.ContainsKey(contact.city))
                     {
                         //add contact entry into exiting key- value (city-contacts) list
                         cityDict[contact.city].Add(contact);
+
                     }
                     else
                     {
@@ -86,7 +136,6 @@
                     }
                 }
             }
-
             DisplayDictionary(cityDict);
             DisplayDictionary(stateDict);
         }
@@ -118,7 +167,6 @@
         {
             Console.WriteLine("Enter first name: ");
             string tempFirstname = Console.ReadLine();
-
 
             if (CheckDuplicate(contacts, tempFirstname))
             {
@@ -153,6 +201,7 @@
             Console.WriteLine("Do you want to add new contact press 1 or press 2 to cancle.");
             int num = Convert.ToInt32(Console.ReadLine());
 
+
             while (num == 1)
             {
                 Contact contact = new Contact();
@@ -183,6 +232,8 @@
         public static void DisplayContacts(List<Contact> contacts)
         {
             //print contacts
+
+
             Console.WriteLine("Current contacts in adress book:");
 
             foreach (Contact contact in contacts)
@@ -190,6 +241,7 @@
                 Console.WriteLine(contact.firstName);
             }
             Console.WriteLine("=============================================================");
+
         }
         public static void EditContacts(List<Contact> contacts)
         {
@@ -211,6 +263,7 @@
                         if (!FillingDetails(contacts[i], contacts)) ;
                         Console.WriteLine("Name is available in database");
                         break;
+
                     }
                 } //end of for loop
                 if (!found)
@@ -220,6 +273,7 @@
                 Console.WriteLine("Do you want to edit contact press 1 to edit or press 2 to cancle.");
                 num = Convert.ToInt32(Console.ReadLine());
             }//while loop end
+
         }
         public static void DeleteContacts(List<Contact> contacts)
         {
@@ -242,6 +296,7 @@
 
                         contacts.RemoveAt(i);
                         break;
+
                     }
                 }
 
