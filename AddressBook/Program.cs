@@ -1,16 +1,54 @@
 ﻿namespace Addressbook
 {
-    public class Program
+    internal class Program
     {
+        public static void FilterByCityAndState()
+        {
+            foreach (var kv in addressBookSystem)
+            {
+                foreach (Contact contact in kv.Value)
+                {
+                    // City filtering
+
+                    //check city is added into city dictionary?
+                    if (cityDict.ContainsKey(contact.city))
+                    {
+                        //add contact entry into exiting key- value (city-contacts) list
+                        cityDict[contact.city].Add(contact);
+
+                    }
+                    else
+                    {
+                        //adding new entery of city  key-value pair
+                        cityDict.Add(contact.city, new List<Contact>());
+                        //adding contact entry into created key city
+                        cityDict[contact.city].Add(contact);
+                    }
+                    //state filtering
+                    //check state is added into state dictionary?
+                    if (stateDict.ContainsKey(contact.state))
+                    {
+                        //add contact entry into exiting key- value (city-contacts) list
+                        stateDict[contact.state].Add(contact);
+
+                    }
+                    else
+                    {
+                        //adding new entery of city
+                        stateDict.Add(contact.state, new List<Contact>());
+                        stateDict[contact.state].Add(contact);
+                    }
+                }
+            }
+            DisplayDictionary(cityDict);
+            DisplayDictionary(stateDict);
+        }
         public static void SearchByCityOrState()
         {
-
             Console.WriteLine("Do you want to search city or state for contact then press 1 or press 2 for exit ");
             int num = Convert.ToInt32(Console.ReadLine());
             while (num == 1)
             {
-
-
                 List<Contact> tempcontacts = new List<Contact>();
                 Console.WriteLine("Enter the city or state to search :");
                 string iCity = Console.ReadLine();
@@ -63,12 +101,10 @@
             contact.zipcode = Convert.ToInt32(Console.ReadLine());
             return true;
         }
-
         public static void CreatingContacts(List<Contact> contacts)
         {
             Console.WriteLine("Do you want to add new contact press 1 or press 2 to cancle.");
             int num = Convert.ToInt32(Console.ReadLine());
-
 
             while (num == 1)
             {
@@ -96,8 +132,6 @@
                     Console.WriteLine("Already exist in database");
                     return true;
                 }
-
-
             }
             return false;
         }
@@ -115,7 +149,6 @@
             Console.WriteLine("=============================================================");
 
         }
-
         public static void EditContacts(List<Contact> contacts)
         {
             Console.WriteLine("Do you want to edit contact details then press 1 or pres 2 for continue: ");
@@ -146,9 +179,7 @@
                 Console.WriteLine("Do you want to edit contact press 1 to edit or press 2 to cancle.");
                 num = Convert.ToInt32(Console.ReadLine());
             }//while loop end
-
         }
-
         public static void DeleteContacts(List<Contact> contacts)
         {
             //deleting contact
@@ -173,7 +204,6 @@
 
                     }
                 }
-
                 if (found)
                 {
                     if (contacts.Count == 0) //if size 0 nothing to delete further
@@ -188,13 +218,12 @@
 
             }//while end
         }
-
-        public static void DisplayDictionary()
+        public static void DisplayDictionary(Dictionary<string, List<Contact>> dict)
         {
-            Console.WriteLine("Diplay current data in addressbook: ");
-            foreach (KeyValuePair<string, List<Contact>> obj in addressBookSystem)
+            Console.WriteLine("Diplay current data in dictionary: ");
+            foreach (KeyValuePair<string, List<Contact>> obj in dict)
             {
-                Console.WriteLine("Displaying contacts of adressbook {0}", obj.Key);
+                Console.WriteLine("Displaying contacts of {0}", obj.Key);
                 DisplayContacts(obj.Value);
                 Console.WriteLine("===============================================");
             }
@@ -203,7 +232,6 @@
         {
             Console.WriteLine("Do you want to create new AddressBook press 1 for yes or 2 for no:");
             int num = Convert.ToInt32(Console.ReadLine());
-
 
             while (num == 1)
             {
@@ -214,29 +242,31 @@
                 addressBookSystem.Add(name, addressBook);
 
                 CreatingContacts(addressBook);
-
+                /*
                 if (addressBook.Count > 0)
                 {
                     EditContacts(addressBook);
                     DeleteContacts(addressBook);
                 }
-                DisplayDictionary();
-
+                
+                DisplayDictionary(addressBookSystem);
+                */
                 Console.WriteLine("Do you want to create another addressbook press 1 or press 2 for exit:");
                 num = Convert.ToInt32(Console.ReadLine());
             }
         }
 
-
-
         public static Dictionary<string, List<Contact>> addressBookSystem = new Dictionary<string, List<Contact>>();
+        public static Dictionary<String, List<Contact>> cityDict = new Dictionary<string, List<Contact>>();
+        public static Dictionary<String, List<Contact>> stateDict = new Dictionary<string, List<Contact>>();
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Sytem.");
 
             CreateAddresBook();
-            DisplayDictionary();
-            SearchByCityOrState();
+            DisplayDictionary(addressBookSystem);
+            //SearchByCityOrState();
+            FilterByCityAndState();
             //DisplayContacts();
             //EditContacts();
             //DeleteContacts();            
