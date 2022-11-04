@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pmJsL6F8dm4/8mkCq6IE/hx2Xbm/VA1gU4fypW+my6FIJaNo9/zaaPsob9QB71KSPUUs9KKlmt6EYR79woo+0A==",
+  "dgSpecHash": "FQDjqQOLIMTiUnomdGoZXnYGdabZ/mdpdel7laQfa2iDPuk2X89TAnnXX9yQFo0f19PDM2PGv9mUa9oIytJJmw==",
   "success": true,
   "projectFilePath": "C:\\AddressBookProgram\\Addressbook\\Addressbook.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\PCS\\.nuget\\packages\\csvhelper\\30.0.0\\csvhelper.30.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

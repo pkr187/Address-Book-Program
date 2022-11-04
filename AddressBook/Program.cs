@@ -1,10 +1,53 @@
-﻿namespace Addressbook
+﻿using CsvHelper;
+using System.Formats.Asn1;
+using System.Globalization;
+
+namespace Addressbook
 {
     internal class Program
     {
+        public static void WriteToCsvFile()
+        {
+            string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contacts.csv";
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                CsvWriter cw = new CsvWriter(sw, CultureInfo.InvariantCulture);
+                Console.WriteLine("Creating and writing into Contact CSV file");
+                //While writing Contact first row is always property Names then all values of list
+                foreach (var book in addressBookSystem.Values)
+                {
+                    cw.WriteRecords<Contact>(book);
+                }
+                Console.WriteLine("Done writing");
+            }
+        }
+        public static void ReadCsvFile()
+        {
+            string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contacts.csv";
+            if (File.Exists(path))
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    CsvReader cr = new CsvReader(sr, CultureInfo.InvariantCulture);
+
+                    //while reading file first row should be property names rest rows should be values to create objects
+                    List<Contact> readResult = cr.GetRecords<Contact>().ToList();
+                    Console.WriteLine("Reading from Contact CSV file");
+
+                    //displaying read object
+                    foreach (var item in readResult)
+                    {
+                        Console.WriteLine(item.ToString());
+                    }
+                }
+            }
+            else
+                Console.WriteLine("Contact.csv file doenot exists");
+        }
+        //uc13
         public static void WriteToFile()
         {
-            string path = @"C:\AddressBookProgram\Addressbook\Contact.txt";
+            string path = @"C:\Users\anura\Music\AddresBookSystem\AddresBookSystem\AddresBookSystem\Contact.txt";
 
             using (StreamWriter sw = File.CreateText(path))
             {
@@ -89,7 +132,6 @@
                 Console.WriteLine(contact.firstName);
             }
             Console.WriteLine("=============================================================");
-
         }
         public static void ShowCountofContactsbyCityandState()
         {
@@ -109,7 +151,6 @@
                 Console.WriteLine("number of contacts in state {0} are {1}", icity, stateDict[icity].Count);
             else
                 Console.WriteLine("number of contacts in state {0} are zero", icity);
-
         }
         public static void FilterByCityAndState()
         {
@@ -118,13 +159,11 @@
                 foreach (Contact contact in kv.Value)
                 {
                     // City filtering
-
                     //check city is added into city dictionary?
                     if (cityDict.ContainsKey(contact.city))
                     {
                         //add contact entry into exiting key- value (city-contacts) list
                         cityDict[contact.city].Add(contact);
-
                     }
                     else
                     {
@@ -139,7 +178,6 @@
                     {
                         //add contact entry into exiting key- value (city-contacts) list
                         stateDict[contact.state].Add(contact);
-
                     }
                     else
                     {
@@ -214,7 +252,6 @@
             Console.WriteLine("Do you want to add new contact press 1 or press 2 to cancle.");
             int num = Convert.ToInt32(Console.ReadLine());
 
-
             while (num == 1)
             {
                 Contact contact = new Contact();
@@ -254,7 +291,6 @@
                 Console.WriteLine(contact.firstName);
             }
             Console.WriteLine("=============================================================");
-
         }
         public static void EditContacts(List<Contact> contacts)
         {
@@ -276,7 +312,6 @@
                         if (!FillingDetails(contacts[i], contacts)) ;
                         Console.WriteLine("Name is available in database");
                         break;
-
                     }
                 } //end of for loop
                 if (!found)
@@ -286,7 +321,6 @@
                 Console.WriteLine("Do you want to edit contact press 1 to edit or press 2 to cancle.");
                 num = Convert.ToInt32(Console.ReadLine());
             }//while loop end
-
         }
         public static void DeleteContacts(List<Contact> contacts)
         {
@@ -309,7 +343,6 @@
 
                         contacts.RemoveAt(i);
                         break;
-
                     }
                 }
 
@@ -379,7 +412,9 @@
                 //FilterByCityAndState();
                 //ShowCountofContactsbyCityandState();
                 //SortByName();
-                WriteToFile();
+                // WriteToFile();
+                WriteToCsvFile();
+                ReadCsvFile();
             }
             catch (Exception ex)
             {
